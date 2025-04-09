@@ -7,6 +7,16 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   
+  // Configure API rewrites to proxy requests to Railway backend
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'https://loadant.com/api/:path*',
+      },
+    ];
+  },
+  
   // Configure security headers
   async headers() {
     return [
@@ -25,40 +35,17 @@ const nextConfig = {
     ];
   },
   
-  env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'https://loadant.com',
-  },
-  
-  webpack: (config) => {
-    if (!config.resolve) {
-      config.resolve = {};
-    }
-    
-    config.resolve.fallback = {
-      ...(config.resolve.fallback || {}),
-      punycode: false 
-    };
-    
-    return config;
-  },
-  
-  // Add image optimizations
+  // Use Vercel's image optimization
   images: {
     domains: ['loadant.com'],
-    unoptimized: process.env.NODE_ENV !== 'production',
   },
   
-  // Add TypeScript checking options
+  // Disable TS errors during build
   typescript: {
-    // Set to true for production builds to catch type errors
-    // Setting to false here since we're already disabling ESLint
     ignoreBuildErrors: true,
   },
   
-  // Add trailing slashes
-  trailingSlash: false,
-  
-  // Add powered by header
+  // Misc optimizations
   poweredByHeader: false,
 };
 
