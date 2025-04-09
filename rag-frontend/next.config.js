@@ -12,7 +12,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'https://loadant.com/api/:path*',
+        destination: 'https://mq2z6qms.up.railway.app/api/:path*',
       },
     ];
   },
