@@ -17,7 +17,12 @@ app = FastAPI(title="Conversation Service")
 # CORS configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=[
+        "http://localhost:3000",
+        "https://*.up.railway.app",
+        "https://loadant.com",           # Add your domain with HTTPS
+        os.getenv("FRONTEND_URL", "")    # Keep this for flexibility
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -284,4 +289,5 @@ async def rename_conversation(thread_id: str, request: ConversationRenameRequest
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8001)
+    port = int(os.getenv("PORT", 8001))
+    uvicorn.run(app, host="0.0.0.0", port=port)
