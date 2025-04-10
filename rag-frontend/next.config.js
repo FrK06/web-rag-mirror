@@ -12,7 +12,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'https://mq2z6qms.up.railway.app/api/:path*',
+        destination: 'https://auth-service-58a543c5-5a59-41e7-bee8-b8fb581add47.railway.app',
       },
     ];
   },
